@@ -21,7 +21,7 @@ remaining_scans = 3
 
 while True:
     file_path = 'videos/{}/{}/{}/{}/{}_output.avi'.format(dt.now().year, dt.now().month, dt.now().day,
-                                                          dt.now().hour, dt.now().minute)
+                                                          dt.now().hour, dt.now().strftime("%Y_%m_%d__%H_%M"))
 
     if not os.path.exists(os.path.dirname(file_path)):
         try:
