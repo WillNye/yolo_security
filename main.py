@@ -16,7 +16,7 @@ cap.set(4, 1080)
 # Define the codec and create VideoWriter object
 fourcc = cv2.VideoWriter_fourcc(*'MPEG')
 cur_second = dt.now().second
-remaining_scans = 3
+remaining_scans = 2
 
 
 while True:
@@ -41,7 +41,7 @@ while True:
 
         if dt.now().second != cur_second:
             cur_second = dt.now().second
-            remaining_scans = 3
+            remaining_scans = 2
 
             if detected_objects['person'] >= 3 and not sending_email:
                 sending_email = True
