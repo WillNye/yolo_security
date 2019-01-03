@@ -1,0 +1,4 @@
+videos/
+.idea/
+*.pyc
+credentials.py
