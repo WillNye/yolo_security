@@ -2,3 +2,4 @@ videos/
 .idea/
 *.pyc
 credentials.py
+detected_person.jpg
