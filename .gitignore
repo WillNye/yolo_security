@@ -1,5 +1,5 @@
 videos/
 .idea/
 *.pyc
-credentials.py
+config.py
 detected_person.jpg

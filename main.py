@@ -7,11 +7,12 @@ from datetime import datetime as dt, timedelta
 import cvlib as cv
 import cv2
 
+from config import BASE_VIDEO_PATH, FPS, HORIZONTAL_PIXEL_COUNT, VERTICAL_PIXEL_COUNT, VIDEO_CAPTURE_SOURCE
 from yolo_email import send_email
 
-cap = cv2.VideoCapture(0)
-cap.set(3, 1920)
-cap.set(4, 1080)
+cap = cv2.VideoCapture(VIDEO_CAPTURE_SOURCE)
+cap.set(3, HORIZONTAL_PIXEL_COUNT)
+cap.set(4, VERTICAL_PIXEL_COUNT)
 
 # Define the codec and create VideoWriter object
 fourcc = cv2.VideoWriter_fourcc(*'MPEG')
@@ -20,8 +21,9 @@ remaining_scans = 2
 
 
 while True:
-    file_path = 'videos/{}/{}/{}/{}/{}_output.avi'.format(dt.now().year, dt.now().month, dt.now().day,
-                                                          dt.now().hour, dt.now().strftime("%Y_%m_%d__%H_%M"))
+    file_path = '{}/{}/{}/{}/{}/{}_output.avi'.format(BASE_VIDEO_PATH,
+                                                      dt.now().year, dt.now().month, dt.now().day, dt.now().hour,
+                                                      dt.now().strftime("%Y_%m_%d__%H_%M"))
 
     if not os.path.exists(os.path.dirname(file_path)):
         try:
@@ -31,7 +33,7 @@ while True:
                 raise
 
     stop_at = dt.now() + timedelta(minutes=1)
-    out = cv2.VideoWriter(file_path, fourcc, 20.0, (int(cap.get(3)), int(cap.get(4))))
+    out = cv2.VideoWriter(file_path, fourcc, float(FPS), (int(cap.get(3)), int(cap.get(4))))
     sending_email = False
     detected_objects = dict()
     detected_objects['person'] = 0

@@ -3,7 +3,7 @@ from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 import smtplib
 
-from credentials import FROM, SEND_TO, LOGIN_EMAIL, LOGIN_PASSWORD
+from config import FROM, SEND_TO, LOGIN_EMAIL, LOGIN_PASSWORD
 
 
 def send_email():
