@@ -7,7 +7,8 @@ from datetime import datetime as dt, timedelta
 import cvlib as cv
 import cv2
 
-from config import BASE_VIDEO_PATH, FPS, HORIZONTAL_PIXEL_COUNT, VERTICAL_PIXEL_COUNT, VIDEO_CAPTURE_SOURCE
+from config import BASE_VIDEO_PATH, FPS, HORIZONTAL_PIXEL_COUNT, VERTICAL_PIXEL_COUNT, \
+    VIDEO_CAPTURE_SOURCE, IMAGE_SCANS_PER_SECOND
 from yolo_email import send_email
 
 cap = cv2.VideoCapture(VIDEO_CAPTURE_SOURCE)
@@ -17,7 +18,7 @@ cap.set(4, VERTICAL_PIXEL_COUNT)
 # Define the codec and create VideoWriter object
 fourcc = cv2.VideoWriter_fourcc(*'MPEG')
 cur_second = dt.now().second
-remaining_scans = 2
+remaining_scans = IMAGE_SCANS_PER_SECOND
 
 
 while True:
@@ -43,7 +44,7 @@ while True:
 
         if dt.now().second != cur_second:
             cur_second = dt.now().second
-            remaining_scans = 2
+            remaining_scans = IMAGE_SCANS_PER_SECOND
 
             if detected_objects['person'] >= 3 and not sending_email:
                 sending_email = True
